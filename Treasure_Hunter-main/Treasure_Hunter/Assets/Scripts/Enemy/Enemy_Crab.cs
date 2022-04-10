@@ -5,8 +5,8 @@ using UnityEngine;
 public class Enemy_Crab : MonoBehaviour
 {
     // Start is called before the first frame update
-    private Rigidbody2D rb;
-
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Animator anim;
     public Transform leftPoint, rightPoint;
 
     private float leftx, rightx;
@@ -14,6 +14,7 @@ public class Enemy_Crab : MonoBehaviour
     public float Speed;
     void Start()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         transform.DetachChildren();
         leftx = leftPoint.position.x;
@@ -28,13 +29,14 @@ public class Enemy_Crab : MonoBehaviour
         Movement();
     }
 
-    void Movement() 
+    void Movement()
     {
-        if (FaceRight) {
+        if (FaceRight)
+        {
             rb.velocity = new Vector2(Speed, rb.velocity.y);
             if (transform.position.x > rightx)
             {
-                transform.localScale = new Vector3(-6, 6, 6);
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
                 FaceRight = false;
             }
         }
@@ -43,9 +45,19 @@ public class Enemy_Crab : MonoBehaviour
             rb.velocity = new Vector2(-Speed, rb.velocity.y);
             if (transform.position.x < leftx)
             {
-                transform.localScale = new Vector3(6, 6, 6);
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
                 FaceRight = true;
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            anim.SetBool("Death", true);
+            Speed = 0;
+            Destroy(this.gameObject, 1.0f);
         }
     }
 }
