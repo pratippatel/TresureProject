@@ -21,7 +21,7 @@ public class Health : MonoBehaviour
     void Update()
     {
         //for testing the player's healthbar and taking damage
-        //if (Input.GetKeyDown(KeyCode.E)) TakeDamage(1);
+        if (Input.GetKeyDown(KeyCode.E)) TakeDamage(1);
     }
 
     public void TakeDamage(float damage)
