@@ -17,7 +17,10 @@ public class PlayerMovement : MonoBehaviour
     public float jumpTime;
     private bool isJumping;
 
-    private void Awake()
+    public int maxJumps;
+    private int numJump;
+
+    private void Start()
     {
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -41,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isJumping = true;
             jumpCounter = jumpTime;
+            numJump = maxJumps;//temp
             Jump();
         }
 
@@ -52,14 +56,29 @@ public class PlayerMovement : MonoBehaviour
                 Jump();
                 jumpCounter -= Time.deltaTime;
             }
-            else isJumping = false;
         }
 
-        if ((Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W)))
-            isJumping = false;
+        //if can do a multiple jump, then pressing jump again resets the jumpCounter
+        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && isJumping)
+        {
+            if (numJump > 0)
+            {
+                Jump();
+                jumpCounter = jumpTime;
+            }
+            else
+            {
+                //print("jumping is false now");
+                isJumping = false;
+            }
+        }
+
+        //once user lets go up jump button, then reduce number of jumps left
+        if ((Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W)) && numJump > 0)
+            numJump--;
 
         //set animation
-            anim.SetBool("run", horiz_input != 0);
+        anim.SetBool("run", horiz_input != 0);
         anim.SetBool("grounded", isGrounded());
     }
 

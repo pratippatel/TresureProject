@@ -7,19 +7,40 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private float distAhead;
     [SerializeField] private float cameraSpeed;
-    [SerializeField] private Vector3 minCamera, maxCamera;
+    [SerializeField] private float minCameraY, maxCameraY;
     private float lookAhead;
+    private float offset;
+
+    void Start()
+    {
+        offset = transform.position.y - player.position.y;
+    }
 
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(player.position.x + lookAhead,
-                                player.position.y + 2.6f,
+        Vector3 vel = Vector3.zero;
+        if (player.position.y < -3.7)
+        {
+            transform.position = new Vector3(player.position.x + lookAhead,
+                                minCameraY,
                                 transform.position.z);
-        /*transform.position = new Vector3(player.position.x + lookAhead,
-                                transform.position.y,
-                                transform.position.z);*/
+            /*transform.position = Vector3.SmoothDamp(transform.position, new Vector3(
+                                  player.position.x + lookAhead, minCameraY,
+                                  transform.position.z), ref vel,
+                                  cameraSpeed * Time.deltaTime);*/
+        }
+        else
+        {
+            transform.position = new Vector3(player.position.x + lookAhead,
+                                maxCameraY,
+                                transform.position.z);
+            /*transform.position = Vector3.SmoothDamp(transform.position, new Vector3(
+                                  player.position.x + lookAhead, maxCameraY,
+                                  transform.position.z), ref vel,
+                                  cameraSpeed * Time.deltaTime);*/
+        }
 
         lookAhead = Mathf.Lerp(lookAhead, distAhead * player.localScale.x,
                               Time.deltaTime * cameraSpeed);
@@ -28,6 +49,5 @@ public class CameraControl : MonoBehaviour
                                           Mathf.Clamp(transform.position.y, minCamera.y, maxCamera.y),
                                           Mathf.Clamp(transform.position.z, minCamera.z, maxCamera.z));*/
     }
-
 
 }
