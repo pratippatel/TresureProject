@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isJumping = true;
             jumpCounter = jumpTime;
-            numJump = maxJumps;//temp
+            numJump = maxJumps;
             Jump();
         }
 
