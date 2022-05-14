@@ -274,28 +274,28 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -6674231327991528795}
-    m_Position: {x: 190, y: -20, z: 0}
+    m_Position: {x: 130, y: 230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6772530499960635188}
-    m_Position: {x: 310, y: 90, z: 0}
+    m_Position: {x: 250, y: 340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1106238801473080805}
-    m_Position: {x: 410, y: -20, z: 0}
+    m_Position: {x: 350, y: 230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1644191535427459282}
-    m_Position: {x: 190, y: 230, z: 0}
+    m_Position: {x: 130, y: 480, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -714106324535960226}
-    m_Position: {x: 700, y: 20, z: 0}
+    m_Position: {x: 640, y: 270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5361552127604220194}
-    m_Position: {x: 410, y: 230, z: 0}
+    m_Position: {x: 350, y: 480, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4137427068758536145}
-    m_Position: {x: 700, y: 100, z: 0}
+    m_Position: {x: 640, y: 350, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7599727632496020122}
-    m_Position: {x: 700, y: 180, z: 0}
+    m_Position: {x: 640, y: 430, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -8685651559131103649}
@@ -303,9 +303,9 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 320, y: -120, z: 0}
-  m_EntryPosition: {x: 80, y: 90, z: 0}
-  m_ExitPosition: {x: 80, y: 40, z: 0}
+  m_AnyStatePosition: {x: 260, y: 130, z: 0}
+  m_EntryPosition: {x: 20, y: 340, z: 0}
+  m_ExitPosition: {x: 20, y: 290, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 6772530499960635188}
 --- !u!1102 &-1106238801473080805
@@ -401,12 +401,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: Hit
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: Attack
     m_Type: 9
     m_DefaultFloat: 0
@@ -432,6 +426,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: Death
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: Hit
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -665,7 +665,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: Hit
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6772530499960635188}
   m_Solo: 0
