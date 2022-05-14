@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -20,8 +21,7 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //for testing the player's healthbar and taking damage
-        if (Input.GetKeyDown(KeyCode.H)) TakeDamage(1);
+        
     }
 
     public void TakeDamage(float damage)
@@ -39,8 +39,17 @@ public class Health : MonoBehaviour
                 anim.SetTrigger("die");
                 GetComponent<PlayerMovement>().enabled = false;
                 dead = true;
+                SceneManager.LoadScene(1);
             }
         }
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemies")
+        {
+            TakeDamage(1);
+        }
     }
 }
