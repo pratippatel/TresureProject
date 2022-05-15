@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraControl : MonoBehaviour
 {
@@ -21,6 +22,10 @@ public class CameraControl : MonoBehaviour
     void Update()
     {
         Vector3 vel = Vector3.zero;
+        if (player.position.y < -9.5)
+        {
+            SceneManager.LoadScene(1);
+        }
         if (player.position.y < -3.7)
         {
             transform.position = new Vector3(player.position.x + lookAhead,
